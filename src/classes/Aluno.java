@@ -1,15 +1,27 @@
 package classes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Aluno {
 
     public String nome;
     public String classe;
 
 
-    Disciplina disciplina = new Disciplina();
+    private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 
 
 
+
+
+    public List<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
+
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
+    }
 
     //setters e getters
     public String getNome() {
@@ -28,26 +40,24 @@ public class Aluno {
         this.classe = classe;
     }
 
-    public Disciplina getDisciplina() {
-        return disciplina;
-    }
-
-    public void setDisciplina(Disciplina disciplina) {
-        this.disciplina = disciplina;
-    }
 
     @Override
     public String toString() {
         return "Aluno{" +
                 "nome='" + nome + '\'' +
                 ", classe='" + classe + '\'' +
-                ", disciplina=" + disciplina +
                 '}';
     }
 
     //metodo media aluno
     public double getMediaNota(){
-        return (disciplina.getNota1() + disciplina.nota2 + disciplina.nota3 + disciplina.nota4)/ 4;
+
+        double somaNotas = 0.0;
+        for (Disciplina disciplina :disciplinas) {
+            somaNotas += disciplina.getNota();
+
+        }
+        return somaNotas / disciplinas.size();
     }
 
 
